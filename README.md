@@ -6,6 +6,6 @@ For this project I used:
 * __JS__
 \
 \
-This site is responsive. There I manipulated the DOM. \
+This site is not responsive yet. There I manipulated the DOM. \
 [Link on this website](https://k-a-webdev.github.io/ToDoAppJS/)
 ![Preview photo](Preview.png)
