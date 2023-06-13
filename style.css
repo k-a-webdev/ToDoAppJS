@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,700;1,300;1,500;1,700&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background: #ebebeb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 3vw;
+}
+
+.wrapper {
+  background: #fff;
+  box-shadow: -2.3px 2.3px 0.6px rgba(48, 54, 88, 0.018), -5.4px 5.4px 1.4px rgba(48, 54, 88, 0.026), -9.7px 9.7px 2.6px rgba(48, 54, 88, 0.032), -16.1px 16.1px 4.3px rgba(48, 54, 88, 0.038), -26.5px 26.5px 7.1px rgba(48, 54, 88, 0.044);
+  border: 0.5px solid rgba(48, 54, 88, 0.1);
+  width: 70%;
+  height: auto;
+  position: relative;
+  margin: 40px 0 60px;
+}
+.wrapper::after {
+  background: #fff;
+  box-shadow: -2.3px 2.3px 0.6px rgba(48, 54, 88, 0.018), -5.4px 5.4px 1.4px rgba(48, 54, 88, 0.026), -9.7px 9.7px 2.6px rgba(48, 54, 88, 0.032), -16.1px 16.1px 4.3px rgba(48, 54, 88, 0.038), -26.5px 26.5px 7.1px rgba(48, 54, 88, 0.044);
+  border: 0.5px solid rgba(48, 54, 88, 0.1);
+  content: "";
+  height: 20px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 98%;
+  bottom: -10px;
+  z-index: -1;
+}
+.wrapper::before {
+  background: #fff;
+  box-shadow: -2.3px 2.3px 0.6px rgba(48, 54, 88, 0.018), -5.4px 5.4px 1.4px rgba(48, 54, 88, 0.026), -9.7px 9.7px 2.6px rgba(48, 54, 88, 0.032), -16.1px 16.1px 4.3px rgba(48, 54, 88, 0.038), -26.5px 26.5px 7.1px rgba(48, 54, 88, 0.044);
+  border: 0.5px solid rgba(48, 54, 88, 0.1);
+  content: "";
+  height: 20px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96%;
+  bottom: -20px;
+  z-index: -2;
+}
+
+.add__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  font-size: 2.1vw;
+  padding: 30px;
+  border-bottom: 2px solid rgba(48, 54, 88, 0.4);
+}
+.add__item .add__item__input {
+  width: 100%;
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.add__item .add__item__input > input {
+  width: 100%;
+  font-size: 0.9em;
+  border: none;
+  border-bottom: 1px solid rgba(48, 54, 88, 0.4);
+  outline: none;
+  transition: all 0.15s;
+}
+.add__item .add__item__input > input:focus, .add__item .add__item__input > input:not(:invalid) {
+  border-bottom: 1px solid rgba(178, 90, 186, 0.4);
+}
+.add__item .add__item__input > input:focus + .forInputItem, .add__item .add__item__input > input:not(:invalid) + .forInputItem {
+  font-size: 0.5em;
+  top: -10px;
+  color: #b25aba;
+}
+.add__item .add__item__input .forInputItem {
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9em;
+  transition: all 0.15s;
+}
+.add__item .add__item__btn {
+  background: #b25aba;
+  color: #fff;
+  font-size: 1.6vw;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.item {
+  padding: 15px 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  border-bottom: 0.1px solid rgba(48, 54, 88, 0.4);
+}
+.item .item__check {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(17, 17, 17, 0.4);
+  border-radius: 100%;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.item .item__check > i {
+  display: none;
+}
+.item .item__check.active {
+  background: #00ff11;
+  border: none;
+}
+.item .item__check.active > i {
+  display: block;
+}
+.item .item__name {
+  font-size: 1.3em;
+}
+.item .item__del {
+  position: absolute;
+  right: 30px;
+  rotate: 45deg;
+  font-size: 2.5em;
+  display: none;
+  cursor: pointer;
+}
+.item:hover .item__del {
+  display: block;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5vw;
+  padding: 30px;
+  border-top: 1.5px solid rgba(48, 54, 88, 0.4);
+}
+.navigation .navigation__bar {
+  display: flex;
+  flex-direction: row;
+}
+.navigation .navigation__bar .navigation__bar__item {
+  padding: 5px;
+  border-radius: 10px;
+}
+.navigation .navigation__bar .navigation__bar__item.active {
+  border: 1px solid rgba(48, 54, 88, 0.4);
+}
+.navigation .navigation__bar .navigation__bar__active {
+  margin: 0 10px;
+}
+.navigation .navigation__clear {
+  background: #b25aba;
+  color: #fff;
+  font-size: 1.6vw;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}/*# sourceMappingURL=style.css.map */

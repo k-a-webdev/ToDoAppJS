@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>To Do App on JS</title>
+</head>
+<body>
+    <div class="title">To Do App</div>
+
+    <div class="wrapper">
+        <div class="add__item">
+            <i class="fa-solid fa-bookmark"></i>
+            <div class="add__item__input">
+                <input type="text" name="inputItem" id="inputItem" required maxlength="30">
+                <label for="inputItem" class="forInputItem">Input your text (max 30 sym)</label>
+            </div>
+            <button type="button" class="add__item__btn">Add</button>
+        </div>
+
+        <!-- <div class="item">
+            <div class="item__check">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="item__name">Learn js</div>
+            <div class="item__del">+</div>
+        </div> -->
+
+        <div class="navigation">
+            <div class="navigation__count"></div>
+
+            <div class="navigation__bar">
+                <div class="navigation__bar__item navigation__bar__all">All</div>
+                <div class="navigation__bar__item navigation__bar__active">Active</div>
+                <div class="navigation__bar__item navigation__bar__completed">Completed</div>
+            </div>
+
+            <div class="navigation__clear">Clear completed</div>
+        </div>
+    </div>
+
+    <footer>Created by Kuzko Andrii</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
