@@ -213,8 +213,12 @@ body {
   .wrapper {
     width: 80%;
   }
+  .title {
+    font-size: 4vw;
+  }
   .add__item, .navigation {
     font-size: 1.8vw;
+    padding: 15px;
   }
   .forInputItem {
     font-size: 2.7vw !important;
@@ -230,8 +234,12 @@ body {
   .wrapper {
     width: 90%;
   }
+  .title {
+    font-size: 5vw;
+  }
   .add__item, .navigation {
     font-size: 1.9vw !important;
+    padding: 10px;
   }
   .forInputItem {
     font-size: 2.5vw !important;
