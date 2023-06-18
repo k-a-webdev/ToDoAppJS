@@ -19,13 +19,21 @@ window.addEventListener('load', () => {
     createNavigataion();
 });
 
-// Event click on add button
+// Events for add item
 let i = 0;
 
-addBtn.addEventListener('click', () => {
-    createItem(false, false);
-    i++;
-});
+const inputCheck = () => {
+    if (inputItem.value.length <= 3) {
+        alert('Minimum 3 characters');
+    } else {
+        createItem(false, false);
+        i++;
+    }
+}
+
+inputItem.addEventListener('keyup', e => {if (e.code == 'Enter') inputCheck()});
+addBtn.addEventListener('click', inputCheck);
+
 
 /* ===== Creating Items ===== */
 

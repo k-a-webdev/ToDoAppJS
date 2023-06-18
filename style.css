@@ -208,6 +208,9 @@ body {
   .forInputItem {
     font-size: 2.2vw !important;
   }
+  #inputItem:focus + .forInputItem {
+    font-size: 1.9vw !important;
+  }
 }
 @media (max-width: 768px) {
   .wrapper {
@@ -224,6 +227,9 @@ body {
   }
   #inputItem, .forInputItem {
     font-size: 3vw !important;
+  }
+  #inputItem:focus + .forInputItem {
+    font-size: 2.5vw !important;
   }
   .add__item > i {
     font-size: 3.4vw !important;
@@ -242,5 +248,8 @@ body {
   }
   #inputItem, .forInputItem {
     font-size: 4vw !important;
+  }
+  #inputItem:focus + .forInputItem {
+    font-size: 3.5vw !important;
   }
 }/*# sourceMappingURL=style.css.map */
