@@ -245,7 +245,7 @@ body {
     }
 
     .title {
-        font-size: 4vw;
+        font-size: 30px;
     }
 
     .add__item, .navigation {
@@ -267,10 +267,6 @@ body {
 @media (max-width: 480px) {
     .wrapper {
         width: 90%;
-    }
-
-    .title {
-        font-size: 5vw;
     }
 
     .add__item, .navigation {
