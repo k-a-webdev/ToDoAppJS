@@ -10,6 +10,7 @@
 body {
   width: 100%;
   min-height: 100vh;
+  padding: 20px 0;
   background: #ebebeb;
   display: flex;
   flex-direction: column;
@@ -62,9 +63,12 @@ body {
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  font-size: 2.1vw;
-  padding: 30px;
+  font-size: 1.6vw;
+  padding: 20px 30px;
   border-bottom: 2px solid rgba(48, 54, 88, 0.4);
+}
+.add__item > i {
+  font-size: 2.5vw;
 }
 .add__item .add__item__input {
   width: 100%;
@@ -96,6 +100,7 @@ body {
   transform: translateY(-50%);
   font-size: 0.9em;
   transition: all 0.15s;
+  cursor: text;
 }
 .add__item .add__item__btn {
   background: #b25aba;
@@ -116,17 +121,19 @@ body {
   border-bottom: 0.1px solid rgba(48, 54, 88, 0.4);
 }
 .item .item__check {
-  width: 30px;
-  height: 30px;
+  width: 3vw;
+  height: 3vw;
   border: 1px solid rgba(17, 17, 17, 0.4);
   border-radius: 100%;
   margin-right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .item .item__check > i {
   display: none;
+  font-size: 1.6vw;
 }
 .item .item__check.active {
   background: #00ff11;
@@ -140,7 +147,7 @@ body {
   opacity: 0.7;
 }
 .item .item__name {
-  font-size: 1.3em;
+  font-size: 1.6vw;
 }
 .item .item__del {
   position: absolute;
@@ -148,6 +155,9 @@ body {
   font-size: 1.5em;
   display: none;
   cursor: pointer;
+}
+.item:hover {
+  background: #f0f0f0;
 }
 .item:hover .item__del {
   display: block;
@@ -158,8 +168,8 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.5vw;
-  padding: 30px;
+  font-size: 1.6vw;
+  padding: 20px 30px;
   border-top: 1.5px solid rgba(48, 54, 88, 0.4);
 }
 .navigation .navigation__bar {
@@ -189,4 +199,41 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .add__item, .navigation, .item__name, .item__check > i {
+    font-size: 1.8vw !important;
+  }
+  .forInputItem {
+    font-size: 2.2vw !important;
+  }
+}
+@media (max-width: 768px) {
+  .wrapper {
+    width: 80%;
+  }
+  .add__item, .navigation {
+    font-size: 1.8vw;
+  }
+  .forInputItem {
+    font-size: 2.7vw !important;
+  }
+  .add__item > i {
+    font-size: 3.4vw !important;
+  }
+  .item__name, .item__check > i {
+    font-size: 3vw !important;
+  }
+}
+@media (max-width: 480px) {
+  .wrapper {
+    width: 90%;
+  }
+  .add__item, .navigation {
+    font-size: 1.9vw !important;
+  }
+  .forInputItem {
+    font-size: 2.5vw !important;
+  }
 }/*# sourceMappingURL=style.css.map */

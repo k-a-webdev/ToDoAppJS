@@ -52,7 +52,6 @@ const createItem = (items, el) => {
     if (items) {
         let tempItem = items[el];
 
-        console.log(items);
         delete items[el];
         items[item.id] = tempItem;
 
