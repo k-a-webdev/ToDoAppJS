@@ -249,11 +249,13 @@ body {
     }
 
     .add__item, .navigation {
-        font-size: 1.8vw;
         padding: 15px;
     }
-    .forInputItem {
-        font-size: 2.7vw !important;
+    .add__item__btn, .navigation__count, .navigation__bar, .navigation__clear {
+        font-size: 3.2vw;
+    }
+    #inputItem, .forInputItem {
+        font-size: 3vw !important;
     }
     .add__item > i {
         font-size: 3.4vw !important;
@@ -269,12 +271,12 @@ body {
         width: 90%;
     }
 
-    .add__item, .navigation {
-        font-size: 1.9vw !important;
+    .add__item__btn, .navigation__count, .navigation__bar, .navigation__clear {
+        font-size: 3vw !important;
         padding: 10px;
     }
 
-    .forInputItem {
-        font-size: 2.5vw !important;
+    #inputItem, .forInputItem {
+        font-size: 4vw !important;
     }
 }
