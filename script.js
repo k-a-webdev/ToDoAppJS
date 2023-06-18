@@ -1,9 +1,25 @@
 "use strict"
 
+// Main elements
 const addItem = document.querySelector('.add__item');
 const inputItem = document.querySelector('#inputItem');
 const addBtn = document.querySelector('.add__item__btn');
 
+// Load list with loading page
+window.addEventListener('load', () => {
+    const items = storageParse();
+    
+    if (items) {
+        for (let el in items) {
+            createItem(items, el);
+            i++;
+        }
+    }
+
+    createNavigataion();
+});
+
+// Event click on add button
 let i = 0;
 
 addBtn.addEventListener('click', () => {
@@ -11,9 +27,16 @@ addBtn.addEventListener('click', () => {
     i++;
 });
 
-const safeParseItems = () => {
+/* ===== Creating Items ===== */
+
+// List from localstorage
+const storageParse = () => {
     let items = localStorage.getItem('toDoItems');
-    if (items[2] == ' ') {
+    if (items === {}) {
+        localStorage.removeItem('toDoItems');
+        return false;
+    }
+    else if (items && items[2] == ' ') {
         items = items.slice(0, items.indexOf(' ') - 1) + items.slice(items.indexOf(' ') + 1, items.length);
     }
     items = JSON.parse(items);
@@ -21,123 +44,110 @@ const safeParseItems = () => {
     return items;
 }
 
-window.addEventListener('load', () => {
-    const items = safeParseItems();
-    for (let el in items) {
-        createItem(items, el);
-        i++;
+const createItem = (items, el) => {
+    // Create main items
+    const item = document.createElement('div');
+    item.className = 'item';
+    item.id = items ? el : `name-${i}`;
+    if (items) {
+        let tempItem = items[el];
+
+        console.log(items);
+        delete items[el];
+        items[item.id] = tempItem;
+
+        items = JSON.stringify(items);
+        localStorage.removeItem('toDoItems');
+        localStorage.setItem('toDoItems', items);
+
+        items = JSON.parse(items);
     }
 
-    createNavigataion();
-});
-
-// Creating Items
-const createItem = (items, el) => {
-    const item = document.createElement('div');
-    item.classList.add('item');
-    item.id = items ? el : `name-${i}`;
 
     const itemCheck = document.createElement('div');
-    const itemCheckIcon = document.createElement('i')
-    itemCheck.classList.add('item__check');
-    itemCheckIcon.classList.add('fa-solid', 'fa-check');
+    const itemCheckIcon = document.createElement('i');
+    itemCheck.className = 'item__check';
+    itemCheckIcon.className = 'fa-solid fa-check';
     itemCheck.appendChild(itemCheckIcon);
     item.appendChild(itemCheck);
 
     const itemName = document.createElement('div');
-    itemName.classList.add('item__name');
-    itemName.innerHTML = items ? items[el].name : inputItem.value;
+    itemName.className = 'item__name';
+    itemName.innerHTML = items ? items[item.id].name : inputItem.value;
     inputItem.value = '';
     item.appendChild(itemName);
 
     const itemDel = document.createElement('div');
     itemDel.className = 'item__del';
-    itemDel.innerText = '+';
+    itemDel.innerText = 'x';
     item.appendChild(itemDel);
 
-    let isChecked = items ? items[el].isChecked : false;
+    // Style checked elements
+    let isChecked = items ? items[item.id].isChecked : false;
     const checIsChecked = (a) => {
         if (a) {
             itemCheck.classList.add('active');
-            itemName.style.textDecoration = 'line-through';
-            itemName.style.opacity = 0.7;
         } else {
             itemCheck.classList.remove('active');
-            itemName.style.textDecoration = 'none';
-            itemName.style.opacity = 1;
         }
     }
     checIsChecked(isChecked);
-    itemCheck.addEventListener('click', () => {
-        isChecked = !isChecked;
-        checIsChecked(isChecked);
-
-        let temp = safeParseItems();
-        temp[item.id].isChecked = isChecked;
-        temp = JSON.stringify(temp);
-        localStorage.removeItem('toDoItems');
-        localStorage.setItem('toDoItems', temp);
-    });
     
+    // Process localStorage
+    const itemInfo = {};
+    itemInfo[item.id] = {
+        'name': itemName.textContent,
+        'isChecked': isChecked,
+    }
+    let info = JSON.stringify(itemInfo);
 
-    if (!items) {
-        const itemInfo = {};
-        itemInfo[item.id] = {
-            'name': itemName.textContent,
-            'isChecked': isChecked,
-        }
-        const itemsInfo = () => {
-            let info = JSON.stringify(itemInfo);
-            if (localStorage.getItem('toDoItems') === null) {
-                localStorage.setItem('toDoItems', info);
-            } else {
-                info = `${localStorage.getItem('toDoItems').slice(0, -1)}, ${info.slice(1, info.length)}`;
-                localStorage.removeItem('toDoItems');
-                localStorage.setItem('toDoItems', info);
-            }
-        }
-        
-        itemsInfo();
+    items = storageParse();
+    if (!items || items === {}) localStorage.setItem('toDoItems', info);
+    else {
+        info = `${localStorage.getItem('toDoItems').slice(0, -1)}, ${info.slice(1, info.length)}`;
+        localStorage.removeItem('toDoItems');
+        localStorage.setItem('toDoItems', info);
     }
     
     addItem.after(item);
     countItems();
+    visibleItems();
 
+    // Event click for check elements
+    itemCheck.addEventListener('click', () => {
+        isChecked = !isChecked;
+        checIsChecked(isChecked);
 
+        let temp = storageParse();
+        temp[item.id].isChecked = isChecked;
+        temp = JSON.stringify(temp);
+        localStorage.removeItem('toDoItems');
+        localStorage.setItem('toDoItems', temp);
+
+        countItems();
+        visibleItems();
+    });
+
+    // Delete element on click 'x'
     itemDel.addEventListener('click', () => {
         item.remove();
 
-        let temp = safeParseItems();
+        let temp = storageParse();
         delete temp[item.id];
         temp = JSON.stringify(temp);
         localStorage.removeItem('toDoItems');
         localStorage.setItem('toDoItems', temp);
         
         countItems();
+        visibleItems();
     });
 }
 
 // Navigatio bar
 const countItems = () => {
     const navigationCount = document.querySelector('.navigation__count');
-    const navigationBarAll = document.querySelector('.navigation__bar__all');
-    const navigationBarActive = document.querySelector('.navigation__bar__active');
-    const navigationBarCompleted = document.querySelector('.navigation__bar__completed');
-    const navigationBarList = [navigationBarAll, navigationBarActive, navigationBarCompleted];
 
-    const navigationActive = () => {
-        let a;
-        navigationBarList.forEach(el => {
-            if (el.classList.contains('active')) {
-                if (el == navigationBarAll) a = 'all';
-                else if (el == navigationBarActive) a = 'active';
-                else a = 'completed';
-            }
-        });
-
-        return a;
-    }
-    const items = safeParseItems();
+    const items = storageParse();
     let i = 0;
 
     for (let el in items) {
@@ -153,66 +163,44 @@ const countItems = () => {
 }
 
 const createNavigataion = () =>  {
-    const navigationCount = document.querySelector('.navigation__count');
     const navigationBarAll = document.querySelector('.navigation__bar__all');
     navigationBarAll.classList.add('active');
     const navigationBarActive = document.querySelector('.navigation__bar__active');
     const navigationBarCompleted = document.querySelector('.navigation__bar__completed');
-    const navigationClear = document.querySelector('.navigation__clear');
-
-    const items = safeParseItems();
-    let navigationActive = 'all';
+    const navigationClear = document.querySelector('.navigation__clear'); 
 
     countItems();
 
-    const visibleItems = (visibleItem) => {
-        for (let el in items) {
-            const selectedItem = document.querySelector(`#${el}`)
-            if (visibleItem == 'all') selectedItem.style.display = 'flex';
-            else if(visibleItem == 'active') {
-                if (items[el].isChecked == false) selectedItem.style.display = 'flex';
-                else selectedItem.style.display = 'none';
-            }
-            else if(visibleItem == 'completed') {
-                if (items[el].isChecked == true) selectedItem.style.display = 'flex';
-                else selectedItem.style.display = 'none';
-            }
-        }
-    }
-
     navigationBarAll.addEventListener(('click'), () => {
-        navigationActive ='all';
         navigationBarAll.classList.add('active');
         navigationBarActive.classList.remove('active');
         navigationBarCompleted.classList.remove('active');
         countItems();
-        visibleItems(navigationActive);
+        visibleItems();
     });
     navigationBarActive.addEventListener(('click'), () => {
-        navigationActive ='active';
         navigationBarAll.classList.remove('active');
         navigationBarActive.classList.add('active');
         navigationBarCompleted.classList.remove('active');
         countItems();
-        visibleItems(navigationActive);
+        visibleItems();
     });
     navigationBarCompleted.addEventListener(('click'), () => {
-        navigationActive ='completed';
         navigationBarAll.classList.remove('active');
         navigationBarActive.classList.remove('active');
         navigationBarCompleted.classList.add('active');
         countItems();
-        visibleItems(navigationActive);
+        visibleItems();
     });
 
     navigationClear.addEventListener('click', () => {
-        const items = safeParseItems();
+        const items = storageParse();
 
         for (let el in items) {
             if (items[el].isChecked == true) {
                 document.querySelector(`#${el}`).remove();
 
-                let temp = safeParseItems();
+                let temp = storageParse();
                 delete temp[el];
                 temp = JSON.stringify(temp);
                 localStorage.removeItem('toDoItems');
@@ -221,6 +209,45 @@ const createNavigataion = () =>  {
         }
 
         countItems();
+        visibleItems();
     });
+}
+
+const navigationActive = () => {
+    const navigationBarAll = document.querySelector('.navigation__bar__all');
+    const navigationBarActive = document.querySelector('.navigation__bar__active');
+    const navigationBarCompleted = document.querySelector('.navigation__bar__completed');
+    const navigationBarList = [navigationBarAll, navigationBarActive, navigationBarCompleted];
+
+    let a;
+
+    navigationBarList.forEach(el => {
+        if (el.classList.contains('active')) {
+            if (el == navigationBarAll) a = 'all';
+            else if (el == navigationBarActive) a = 'active';
+            else a = 'completed';
+        }
+    });
+
+    return a;
+}
+
+const visibleItems = () => {
+    const items = storageParse();
+    const visibleItem = navigationActive();
+
+    for (let el in items) {
+        const selectedItem = document.querySelector(`#${el}`);
+
+        if (visibleItem == 'all') selectedItem.style.display = 'flex';
+        else if(visibleItem == 'active') {
+            if (items[el].isChecked == false) selectedItem.style.display = 'flex';
+            else selectedItem.style.display = 'none';
+        }
+        else if(visibleItem == 'completed') {
+            if (items[el].isChecked == true) selectedItem.style.display = 'flex';
+            else selectedItem.style.display = 'none';
+        }
+    }
 }
 

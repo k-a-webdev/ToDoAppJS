@@ -135,14 +135,17 @@ body {
 .item .item__check.active > i {
   display: block;
 }
+.item .item__check.active + .item__name {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
 .item .item__name {
   font-size: 1.3em;
 }
 .item .item__del {
   position: absolute;
   right: 30px;
-  rotate: 45deg;
-  font-size: 2.5em;
+  font-size: 1.5em;
   display: none;
   cursor: pointer;
 }
@@ -166,9 +169,14 @@ body {
 .navigation .navigation__bar .navigation__bar__item {
   padding: 5px;
   border-radius: 10px;
+  cursor: pointer;
 }
 .navigation .navigation__bar .navigation__bar__item.active {
   border: 1px solid rgba(48, 54, 88, 0.4);
+  color: #b25aba;
+}
+.navigation .navigation__bar .navigation__bar__item:hover {
+  color: #b25aba;
 }
 .navigation .navigation__bar .navigation__bar__active {
   margin: 0 10px;
